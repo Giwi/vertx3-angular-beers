@@ -8,7 +8,7 @@ import org.giwi.vertx.annotation.VertxRoute;
 /**
  * The type Main route.
  */
-@VertxRoute()
+@VertxRoute(rootPath = "/")
 public class MainRoute implements VertxRoute.Route {
 
     /**
@@ -21,7 +21,7 @@ public class MainRoute implements VertxRoute.Route {
     public Router init(Vertx vertx) {
         Router mainRouter = Router.router(vertx);
 
-        mainRouter.route("/static/*").handler(StaticHandler.create());
+        mainRouter.route("/*").handler(StaticHandler.create());
         return mainRouter;
     }
 }
