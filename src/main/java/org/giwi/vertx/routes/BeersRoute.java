@@ -1,6 +1,7 @@
 package org.giwi.vertx.routes;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
@@ -10,6 +11,7 @@ import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
+import io.vertx.ext.web.handler.CorsHandler;
 import org.giwi.vertx.annotation.VertxRoute;
 
 import javax.inject.Inject;
@@ -42,6 +44,12 @@ public class BeersRoute implements VertxRoute.Route {
             response.putHeader("content-type", "application/json");
             routingContext.next();
         });
+
+        router.route().path("/*").handler(CorsHandler.create("*")
+                                                     .allowedMethod(HttpMethod.GET)
+                                                     .allowedMethod(HttpMethod.POST)
+                                                     .allowedMethod(HttpMethod.PUT)
+                                                     .allowedMethod(HttpMethod.DELETE));
 
         router.get("/BeerList").handler(routingContext -> {
             JsonObject query = new JsonObject();
