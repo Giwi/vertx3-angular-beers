@@ -40,7 +40,6 @@ public class MongoClientProvider implements Provider<MongoClient> {
      */
     @Override
     public MongoClient get() {
-        System.out.println(config.encodePrettily());
         return MongoClient.createShared(vertx, config);
     }
 }
