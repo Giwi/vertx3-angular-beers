@@ -17,7 +17,7 @@ public class MongoClientProvider implements Provider<MongoClient> {
      * The Config.
      */
     @Inject
-    @Named("mongo.persistor")
+    @Named("mongo.db")
     private JsonObject config;
     /**
      * The Vertx.
@@ -40,6 +40,7 @@ public class MongoClientProvider implements Provider<MongoClient> {
      */
     @Override
     public MongoClient get() {
-        return MongoClient.createShared(vertx, config.getJsonObject("mongo.db"));
+        System.out.println(config.encodePrettily());
+        return MongoClient.createShared(vertx, config);
     }
 }

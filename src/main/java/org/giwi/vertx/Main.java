@@ -1,8 +1,5 @@
 package org.giwi.vertx;
 
-import org.giwi.vertx.annotation.VertxRoute;
-import org.giwi.vertx.injection.GuiceModule;
-import org.giwi.vertx.routes.SubRoute;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.vertx.core.Vertx;
@@ -11,12 +8,13 @@ import io.vertx.core.file.FileSystem;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
+import org.giwi.vertx.annotation.VertxRoute;
+import org.giwi.vertx.injection.GuiceModule;
 
 /**
  * The type Main.
  */
 public class Main {
-
 
     /**
      * The entry point of application.
@@ -37,7 +35,6 @@ public class Main {
                 }
         );
 
-        mainRouter.mountSubRouter("/sub", new SubRoute().init(vertx));
         server.requestHandler(mainRouter::accept).listen(8080);
     }
 }
