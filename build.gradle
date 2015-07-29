@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version = '3.0.0'
+version = '0.0.1'
 
 if (!JavaVersion.current().java8Compatible) {
     throw new IllegalStateException('''A Haiku:
@@ -44,6 +44,12 @@ shadowJar {
     }
     mergeServiceFiles {
         include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+    }
+    doLast {
+        copy {
+            from "$buildDir/libs/"
+            into "application/"
+        }
     }
 }
 
